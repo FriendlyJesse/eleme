@@ -1,31 +1,22 @@
 <template>
-  <div class="setting">
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">设置</h1>
-    </header>
-    <section class="setting__content mui-content">
-      <ul class="mui-table-view">
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right">语言设置language</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right">语言设置language</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right">语言设置language</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right">语言设置language</a>
-        </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate-right">语言设置language</a>
-        </li>
-      </ul>
-      <transition :name="transitionName">
-        <router-link to="/A" tag="button" class="radius child-view">{{btn}}</router-link>
-      </transition>
-    </section>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+    <h2>Essential Links</h2>
+    <ul>
+      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
+      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
+      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
+      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
+      <br>
+      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
+    </ul>
+    <h2>Ecosystem</h2>
+    <ul>
+      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
+      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
+      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
+      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+    </ul>
   </div>
 </template>
 
@@ -34,61 +25,26 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      btn: '退出账号',
-      transitionName: 'slide-left'
-    }
-  },
-  watch: {
-    '$route' (to, from) {
-      const toDepth = to.path.split('/').length
-      const fromDepth = from.path.split('/').length
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped rel="stylesheet/scss">
-  .setting
-  {
-    font-size: 1.4rem;
-
-    &__content
-    {
-      a
-      {
-        font-size: 1.4rem;
-      }
-      .radius
-      {
-        width: calc(100% - 30px);
-        background: red;
-        color: #fff;
-        margin-top: 10px;
-      }
-    }
-
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s ease;
-    }
-    .fade-enter, .fade-leave-active {
-      opacity: 0
-    }
-    .child-view {
-      position: absolute;
-      transition: all .5s cubic-bezier(.55,0,.1,1);
-    }
-    .slide-left-enter, .slide-right-leave-active {
-      opacity: 0;
-      -webkit-transform: translate(30px, 0);
-      transform: translate(30px, 0);
-    }
-    .slide-left-leave-active, .slide-right-enter {
-      opacity: 0;
-      -webkit-transform: translate(-30px, 0);
-      transform: translate(-30px, 0);
-    }
-  }
+<style scoped>
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
 </style>
