@@ -12,40 +12,40 @@
 
 <script>
   import vHeader from './components/header/header.vue'
-export default {
-  name: 'app',
-  data()
-  {
-      return {
-        seller:{},
+  export default {
+    name: 'app',
+    data()
+    {
+        return {
+          seller:{}
+        }
+    },
+    components:
+    {
+        vHeader
+    },
+    created()
+    {
+//      let _this = this;
+//      mui.ajax('http://study.onebound.cn/jesse/mock/',{
+//        dataType:'json',//服务器返回json格式数据
+//        type:'get',//HTTP请求类型
+//        headers:{'Content-Type':'application/json'},
+//        success:function(data){
+//          _this.seller = data.seller
+//        },
+//        error:function(xhr,type,errorThrown){
+//          //异常处理；
+//          console.log(type);
+//        }
+//      });
+      this.$http.get('/api').then(res => this.seller = res.data.seller);
+    },
+    mounted()
+    {
 
-      }
-  },
-  components:
-  {
-      vHeader
-  },
-  created()
-  {
-//    mui.ajax('http://study.onebound.cn/jesse/mock/',{
-//      dataType:'json',//服务器返回json格式数据
-//      type:'get',//HTTP请求类型
-//      headers:{'Content-Type':'application/json'},
-//      success:function(data){
-//        _this.goods = data.goods[0].name;
-//      },
-//      error:function(xhr,type,errorThrown){
-//        //异常处理；
-//        console.log(type);
-//      }
-//    });
-    this.$http.get('/api').then(res => this.seller = res.data.seller);
-  },
-  mounted()
-  {
-
+    }
   }
-}
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
