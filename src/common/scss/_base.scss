@@ -1,20 +1,6 @@
-@media (min-device-pixel-ratio: 1.5)
+body, html
 {
-  .border-1px
-  {
-    &::after
-    {
-      transform: scaleY(.7);
-    }
-  }
-}
-@media (min-device-pixel-ratio: 2)
-{
-  .border-1px
-  {
-    &::after
-    {
-      transform: scaleY(.5);
-    }
-  }
+  line-height: 1;
+  font-weight: 200;
+  font-family: 'PingFang SC', 'StHeitiSC-Light', 'Helvetica-Light', Arial, sans-serif;
 }

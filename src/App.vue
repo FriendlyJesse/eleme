@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <v-header></v-header>
-    <nav class="tab border-1px">
+    <v-header :seller="seller"></v-header>
+    <nav class="tab">
       <router-link to="/goods" tag="div" class="tab-item">商品</router-link>
       <router-link to="ratings" tag="div" class="tab-item">评论</router-link>
       <router-link to="seller" tag="div" class="tab-item">商家</router-link>
@@ -17,6 +17,7 @@ export default {
   data()
   {
       return {
+        seller:{},
 
       }
   },
@@ -24,7 +25,7 @@ export default {
   {
       vHeader
   },
-  mounted()
+  created()
   {
 //    mui.ajax('http://study.onebound.cn/jesse/mock/',{
 //      dataType:'json',//服务器返回json格式数据
@@ -38,7 +39,11 @@ export default {
 //        console.log(type);
 //      }
 //    });
-//    this.$http.get('/api').then(res => this.goods = res.data.goods[0].name);
+    this.$http.get('/api').then(res => this.seller = res.data.seller);
+  },
+  mounted()
+  {
+
   }
 }
 </script>
