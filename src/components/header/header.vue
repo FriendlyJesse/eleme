@@ -30,19 +30,40 @@
     <div class="background">
       <img :src="seller.avatar" />
     </div>
-    <div class="detail" v-show="detailShow">
-      <div class="detail-wrapper clearfix">
-        <div class="detail-main">
-          <h1 class="name">{{seller.name}}</h1>
-          <div class="star-warpper">
-            <star :size="48" :score="seller.score"></star>
+    <transition name="fade">
+      <div class="detail" v-show="detailShow">
+        <div class="detail-wrapper clearfix">
+          <div class="detail-main">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-warpper">
+              <star :size="48" :score="seller.score"></star>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <ul class="supports" v-if="seller.supports">
+              <li class="support-item" v-for="item in seller.supports">
+                <span class="icon" :class="classMap[item.type]"></span>
+                <span class="text">{{item.description}}</span>
+              </li>
+            </ul>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="bulletin">
+              <p class="content">{{seller.bulletin}}</p>
+            </div>
           </div>
         </div>
+        <div class="detail-close" @click="detailShow = false">
+          <i class="icon-close"></i>
+        </div>
       </div>
-      <div class="detail-close">
-        <i class="icon-close" @click="detailShow = false"></i>
-      </div>
-    </div>
+    </transition>
   </header>
 </template>
 
@@ -276,6 +297,89 @@
             font-weight: 700;
             text-align: center;
           }
+          .title
+          {
+            display: flex;
+            width: 80%;
+            margin: 30px auto 24px;
+
+            .line
+            {
+              flex: 1;
+              position: relative;
+              top: -6px;
+              border-bottom: 1px solid rgba(255, 255, 255, .2);
+            }
+            .text
+            {
+              padding: 0 12px;
+              font-size: 14px;
+              font-weight: 700;
+            }
+          }
+          .supports
+          {
+            width: 80%;
+            margin: 0 auto;
+
+            .support-item
+            {
+              padding: 0 12px;
+              margin-bottom: 12px;
+              font-size: 0;
+
+              &:last-child
+              {
+                margin-bottom: 0;
+              }
+              .icon
+              {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                vertical-align: top;
+                margin-right: 16px;
+
+                &.decrease
+                {
+                  @include bg-img('decrease_2');
+                }
+                &.discount
+                {
+                  @include bg-img('discount_2');
+                }
+                &.guarantee
+                {
+                  @include bg-img('guarantee_2');
+                }
+                &.invoice
+                {
+                  @include bg-img('invoice_2');
+                }
+                &.special
+                {
+                  @include bg-img('special_2');
+                }
+              }
+              .text
+              {
+                line-height: 16px;
+                font-size: 12px;
+              }
+            }
+          }
+          .bulletin
+          {
+            width: 80%;
+            margin: 0 auto;
+
+            .content
+            {
+              padding: 0 12px;
+              line-height: 24px;
+              font-size: 12px;
+            }
+          }
           .star-warpper
           {
             margin-top: 18px;
@@ -293,6 +397,16 @@
         clear: both;
         font-size: 32px;
       }
+    }
+
+    //动画
+    .fade-enter-active, .fade-leave-active
+    {
+      transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to
+    {
+      opacity: 0
     }
   }
 </style>
