@@ -34,6 +34,7 @@
         </li>
       </ul>
     </div>
+    <shop-cart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
   </div>
 </template>
 
@@ -42,6 +43,10 @@
   import shopCart from '../shopCart/shopCart';
 
   export default {
+    props:
+    {
+      seller: Object
+    },
     components:
     {
       shopCart
