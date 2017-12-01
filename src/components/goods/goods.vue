@@ -28,19 +28,23 @@
                 <div class="price">
                   <span class="now">{{'￥' + food.price}}</span><span class="old" v-if="food.oldPrice">{{'￥' + food.oldPrice}}</span>
                 </div>
+                <div class="cartControl-warpper">
+                  <cart-control :food="food" @add="addFood"></cart-control>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <shop-cart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
+    <shop-cart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
   </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll';
   import shopCart from '../shopCart/shopCart';
+  import cartControl from '../cartControl/cartControl';
 
   export default {
     props:
@@ -49,12 +53,13 @@
     },
     components:
     {
-      shopCart
+      shopCart,
+      cartControl
     },
     data()
     {
       return {
-        goods: {},
+        goods: [],
         classMap:
         [
           'decrease',
@@ -109,6 +114,21 @@
           }
         }
         return 0;
+      },
+      selectFoods()
+      {
+        let foods =[];
+        this.goods.forEach((good) =>
+        {
+          good.foods.forEach((food) =>
+          {
+              if (food.count)
+              {
+                foods.push(food);
+              }
+          });
+        });
+        return foods;
       }
     },
     methods:
@@ -148,6 +168,10 @@
           height += item.clientHeight;
           this.listHeight.push(height);
         }
+      },
+      addFood(target)
+      {
+        console.log(1)
       }
     }
   }
@@ -318,6 +342,12 @@
               font-size: 10px;
               color: rgb(147, 157, 159);
             }
+          }
+          .cartControl-warpper
+          {
+            position: absolute;
+            right: 0;
+            bottom: 12px;
           }
         }
       }

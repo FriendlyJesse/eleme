@@ -15,6 +15,12 @@
         <div class="pay" :class="{enough: this.minPrice - this.totalPrice <= 0}">{{payDesc}}</div>
       </div>
     </div>
+    <div class="ball-container">
+      <!--<transion>-->
+        <div class="ball" v-for="ball in balls" v-show="ball.show"></div>
+        <div class="inner"></div>
+      <!--</transion>-->
+    </div>
   </div>
 </template>
 
@@ -40,6 +46,29 @@
       {
         type: Number,
         default: 0
+      }
+    },
+    data()
+    {
+      return {
+          balls:
+          [
+            {
+              show: false
+            },
+            {
+              show: false
+            },
+            {
+              show: false
+            },
+            {
+              show: false
+            },
+            {
+              show: false
+            }
+          ]
       }
     },
     computed:
@@ -193,6 +222,30 @@
           {
             color: #fff;
             background: #00b43c;
+          }
+        }
+      }
+    }
+    .ball-container
+    {
+      .ball
+      {
+        position: fixed;
+        left: 32px;
+        bottom: 32px;
+        z-index: 200;
+
+        &.drop-transiton
+        {
+          transition: .4s;
+
+          .inner
+          {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: rgb(0, 160, 220);
+            transition: .4;
           }
         }
       }
