@@ -16,10 +16,13 @@
       </div>
     </div>
     <div class="ball-container">
-      <!--<transion>-->
-        <div class="ball" v-for="ball in balls" v-show="ball.show"></div>
-        <div class="inner"></div>
-      <!--</transion>-->
+      <div v-for="ball in balls">
+        <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
+          <div class="ball" v-show="ball.show">
+            <div class="inner"></div>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -51,24 +54,25 @@
     data()
     {
       return {
-          balls:
-          [
-            {
-              show: false
-            },
-            {
-              show: false
-            },
-            {
-              show: false
-            },
-            {
-              show: false
-            },
-            {
-              show: false
-            }
-          ]
+        balls:
+        [
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          },
+          {
+            show: false
+          }
+        ],
+        dropBalls: []
       }
     },
     computed:
@@ -94,6 +98,40 @@
         else
         {
           return '去结算';
+        }
+      }
+    },
+    methods:
+    {
+      drop(el)
+      {
+        for (let i; i < this.balls.length; i++)
+        {
+          let ball = this.balls[i];
+          if (!ball.show)
+          {
+            ball.show = true;
+            ball.el = el;
+            this.dropBalls.push(ball);
+            return;
+          }
+        }
+      },
+      beforeDrop(el)
+      {
+        let count = this.balls.length;
+        while (count--)
+        {
+          let ball = this.balls[count];
+          if (ball.show)
+          {
+            let rect = ball.el.getBoundingClientRect();
+            let x = rect.left - 32;
+            let y = -(window.innerHeight - rect.top);
+            el.style.display = '';
+            el.style.webkitTransform = `translate3d(0,${y}px,0)`;
+            el.style.transform = `translate3d(0,${y}px,0)`;
+          }
         }
       }
     }
@@ -234,19 +272,15 @@
         left: 32px;
         bottom: 32px;
         z-index: 200;
+        transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41);
 
-        &.drop-transiton
+        .inner
         {
-          transition: .4s;
-
-          .inner
-          {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: rgb(0, 160, 220);
-            transition: .4;
-          }
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: rgb(0, 160, 220);
+          transition: all 0.4s linear
         }
       }
     }

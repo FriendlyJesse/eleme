@@ -37,7 +37,7 @@
         </li>
       </ul>
     </div>
-    <shop-cart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shop-cart>
+    <shop-cart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" ref="shopcart"></shop-cart>
   </div>
 </template>
 
@@ -171,8 +171,14 @@
       },
       addFood(target)
       {
-        console.log(1)
-      }
+        this._drop(target);
+      },
+      _drop(target) {
+        // 体验优化,异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target);
+        });
+      },
     }
   }
 </script>
