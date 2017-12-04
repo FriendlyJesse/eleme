@@ -60,12 +60,12 @@
     {
       transition: .4s linear;
       opacity: 1;
-      transform: translate3D(0, 0, 0) rotate(0);
+      transform: translate3d(0, 0, 0) rotate(0);
     }
     .move-enter, .move-leave-to
     {
       opacity: 0;
-      transform: translate3D(24px, 0, 0) rotate(180deg);
+      transform: translate3d(24px, 0, 0) rotate(180deg);
     }
   }
 </style>
