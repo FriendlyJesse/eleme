@@ -55,7 +55,7 @@
 
 <script>
   import BScroll from 'better-scroll';
-  import cartControl from '../../components/cartControl/cartControl.vue';
+  import cartControl from '../../components/cartControl/cartControl';
 
   export default {
     props:
