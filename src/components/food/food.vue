@@ -40,14 +40,14 @@
                   <span class="name">{{rating.username}}</span>
                   <img width="12" height="12" class="avatar" :src="rating.avatar" />
                 </div>
-                <div class="time">{{rating.rateTime}}</div>
+                <div class="time">{{rating.rateTime | formatData}}</div>
                 <p class="text">
                   <span :class="{'icon-thumb_up': rating.rateType == 0, 'icon-thumb_down': rating.rateType == 1}"></span>
                   {{rating.text}}
                 </p>
               </li>
             </ul>
-            <div class="no-reting" v-show="!food.ratings || !food.ratings.length"></div>
+            <div class="no-reting" v-show="!food.ratings || !food.ratings.length">暂无评价</div>
           </div>
         </div>
       </div>
@@ -60,6 +60,7 @@
   import cartControl from '../cartControl/cartControl';
   import split from '../split/split';
   import ratingSelect from '../ratingSelect/ratingSelect';
+  import {formatDate} from '../../common/js/date';
 
   const POSITIVE = 0,
         NEGATIVE = 1,
@@ -89,6 +90,14 @@
           positive: '推荐',
           negative: '吐槽'
         }
+      }
+    },
+    filters:
+    {
+      formatData(time)
+      {
+        let date = new Date(time);
+        return formatDate(date, 'yyyy-MM-dd hh:mm');
       }
     },
     methods:
@@ -355,6 +364,12 @@
               color: rgb(147, 153, 159);
             }
           }
+        }
+        .no-reting
+        {
+          padding: 16px 0;
+          font-size: 12px;
+          color: rgb(147, 153, 159);
         }
       }
     }
