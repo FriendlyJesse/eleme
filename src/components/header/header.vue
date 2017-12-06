@@ -68,7 +68,7 @@
 </template>
 
 <script>
-  import star from '../../components/star/star';
+  import star from '@/components/star/star';
 
   export default {
     name: 'header',

@@ -44,9 +44,9 @@
 
 <script>
   import BScroll from 'better-scroll';
-  import shopCart from '../shopCart/shopCart';
-  import cartControl from '../cartControl/cartControl';
-  import food from '../food/food';
+  import shopCart from '@/components/shopCart/shopCart';
+  import cartControl from '@/components/cartControl/cartControl';
+  import food from '@/components/food/food';
 
   export default {
     props:
@@ -78,32 +78,32 @@
     },
     created()
     {
-//      let _this = this;
-//      mui.ajax('http://study.onebound.cn/jesse/mock/',{
-//        dataType:'json',//服务器返回json格式数据
-//        type:'get',//HTTP请求类型
-//        headers:{'Content-Type':'application/json'},
-//        success:function(data)
-//        {
-//          _this.goods = data.goods;
-//          _this.$nextTick(() => {
-//            _this._initScroll();
-//            _this._calculateHeight();
-//          });
-//        },
-//        error:function(xhr,type,errorThrown){
-//          //异常处理；
-//          console.log(type);
-//        }
-//      });
-      this.$http.get('/api').then((res) =>
-      {
-          this.goods = res.data.goods;
-          this.$nextTick(() => {
-            this._initScroll();
-            this._calculateHeight();
+      let _this = this;
+      mui.ajax('http://study.onebound.cn/jesse/mock/',{
+        dataType:'json',//服务器返回json格式数据
+        type:'get',//HTTP请求类型
+        headers:{'Content-Type':'application/json'},
+        success:function(data)
+        {
+          _this.goods = data.goods;
+          _this.$nextTick(() => {
+            _this._initScroll();
+            _this._calculateHeight();
           });
+        },
+        error:function(xhr,type,errorThrown){
+          //异常处理；
+          console.log(type);
+        }
       });
+//      this.$http.get('/api').then((res) =>
+//      {
+//          this.goods = res.data.goods;
+//          this.$nextTick(() => {
+//            this._initScroll();
+//            this._calculateHeight();
+//          });
+//      });
     },
     computed:
     {

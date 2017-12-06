@@ -3,15 +3,18 @@
     <v-header :seller="seller"></v-header>
     <nav class="tab">
       <router-link to="/goods" tag="div" class="tab-item">商品</router-link>
-      <router-link to="ratings" tag="div" class="tab-item">评论</router-link>
-      <router-link to="seller" tag="div" class="tab-item">商家</router-link>
+      <router-link to="/ratings" tag="div" class="tab-item">评论</router-link>
+      <router-link to="/seller/123" tag="div" class="tab-item">商家</router-link>
     </nav>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-  import vHeader from './components/header/header.vue'
+  import vHeader from '@/components/header/header'
+
   export default {
     name: 'app',
     data()
@@ -26,20 +29,20 @@
     },
     created()
     {
-//      let _this = this;
-//      mui.ajax('http://study.onebound.cn/jesse/mock/',{
-//        dataType:'json',//服务器返回json格式数据
-//        type:'get',//HTTP请求类型
-//        headers:{'Content-Type':'application/json'},
-//        success:function(data){
-//          _this.seller = data.seller
-//        },
-//        error:function(xhr,type,errorThrown){
-//          //异常处理；
-//          console.log(type);
-//        }
-//      });
-      this.$http.get('/api').then(res => this.seller = res.data.seller);
+      let _this = this;
+      mui.ajax('http://study.onebound.cn/jesse/mock/',{
+        dataType:'json',//服务器返回json格式数据
+        type:'get',//HTTP请求类型
+        headers:{'Content-Type':'application/json'},
+        success:function(data){
+          _this.seller = data.seller
+        },
+        error:function(xhr,type,errorThrown){
+          //异常处理；
+          console.log(type);
+        }
+      });
+//      this.$http.get('/api').then(res => this.seller = res.data.seller);
     },
     mounted()
     {
@@ -73,6 +76,5 @@
         }
       }
     }
-
   }
 </style>

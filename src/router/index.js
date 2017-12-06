@@ -21,7 +21,7 @@ export default new Router({
       component: ratings
     },
     {
-      path: '/seller',
+      path: '/seller/:id',
       component: seller
     }
   ]
